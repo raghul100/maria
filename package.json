@@ -1,10 +1,16 @@
 {
-  "name": "node-restapi",
-  "version": "1.0.0",
+  "name": "angular",
+  "version": "0.0.0",
   "description": "",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+   "dev": "concurrently --kill-others \"ng serve\" \"nodemon ./routes/index.js\"",
+    "compile:server": "webpack --config webpack.server.config.js --progress --colors",
+    "serve:ssr": "node dist/server",
+    "build:ssr": "npm run build:client-and-server-bundles && npm run compile:server",
+    "build:client-and-server-bundles": "ng build --prod && ng run demo:server:production",
+    "run:ssr": "npm run build:ssr && npm run serve:ssr"
   },
   "author": {
     "name": "Adam",
@@ -21,7 +27,5 @@
     "mysql": "^2.18.1",
     "req-flash": "0.0.3"
   },
-  "devDependencies": {
-    "nodemon": "^2.0.6"
-  }
+  "devDependencies": {}
 }
